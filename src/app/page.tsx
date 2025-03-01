@@ -1,12 +1,12 @@
 "use client"
 
 import axios from "axios";
-import styles from "./page.module.css";
+import classes from "./page.module.css";
 import React, { useEffect, useState } from "react";
 import { IUser } from "./types/types";
 
 export default function Home() {
-  const [user, setUser] = useState<IUser | null>(null);
+  const [users, setUsers] = useState<IUser[]>([]);
 
   useEffect(() => {
     fetchUser();
@@ -14,17 +14,25 @@ export default function Home() {
   
   async function fetchUser() {
     try {
-      const res = await axios.get("https://jsonplaceholder.typicode.com/users/1");
+      const res = await axios.get("https://jsonplaceholder.typicode.com/users");
       console.log(res.data);
-      setUser(res.data);
+      setUsers(res.data);
     } catch (error) {
       console.error("Error fetching user:", error);
     }
   }
 
   return (
-    <div className={styles.page}>
-      <h1>Hello, {user ? user.name : "Loading..."}</h1>
+    <div className={classes.page}>
+      {users ? (
+        users.map((user) => (
+          <div key={user.id} className={classes.pageFields}>
+            <h2>{user.name}</h2>
+          </div>
+        ))
+      ) : (
+        <p>No users found</p>
+      )}
     </div>
   );
 }
