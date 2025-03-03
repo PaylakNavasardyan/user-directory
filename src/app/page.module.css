@@ -3,8 +3,9 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 10px;
-
   .pageFields {
     width: 90%;
     height: 60px;
@@ -21,5 +22,8 @@
   }
   .pageFields:hover {
     transform: scale(1.1);
+  }
+  p {
+    font-size: 40px;
   }
 }
