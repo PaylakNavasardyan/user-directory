@@ -3,7 +3,3 @@ export interface IUser {
     name: string;
     email: string
 };
-
-export interface HomeProps<T> {
-    items: T[]
-}
