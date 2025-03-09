@@ -1,19 +1,28 @@
 import { IUser } from "@/app/types/types"; 
 import { notFound } from "next/navigation";
 
-async function getUser(id: number): Promise<IUser | null> {
+async function getUser(id: string): Promise<IUser | null> {
   try {
-    const res = await fetch((`https://jsonplaceholder.typicode.com/users/${id}`));
+    const predefinedUsers: IUser[] = [
+      { id: 11, name: "Jonathan Jonson", email: "JJ-blakc@gmail.com" },
+      { id: 12, name: "Ben Potter", email: "Potter_Ben@gmail.com" },
+      { id: 13, name: "Andrew Scott Jr", email: "ScottJr@gmail.com" }
+    ];
 
-    if(!res.ok) return null;
-    return res.json();
-  } catch(error) {
+    const localUser = predefinedUsers.find((user) => user.id === Number(id));
+    if (localUser) return localUser;
+
+    const res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
+    if (!res.ok) return null;
+
+    return await res.json();
+  } catch (error) {
     console.log("Error fetching user", error);
     return null;
   }
 }
 
-export default async function UserPage({ params }: { params: {id: number} }) {
+export default async function UserPage({ params }: { params: {id: string} }) {
   const user = await getUser(params.id);
 
   if(!user) return notFound();
