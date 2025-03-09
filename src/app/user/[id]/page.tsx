@@ -28,11 +28,11 @@ export default async function UserPage({ params }: { params: {id: string} }) {
   if(!user) return notFound();
 
   return (
-    <div>
-      <h1>User Profile</h1>
-      <p><strong>ID:</strong> {user.id}</p>
-      <p><strong>Name:</strong> {user.name}</p>
-      <p><strong>Email:</strong> {user.email}</p>
+    <div style={{textAlign: 'center', marginTop: '25px'}}>
+      <h1 style={{color: '#EB574AFF'}}>User Profile</h1>
+      <p style={{color: '#8AEB79FF'}}><strong>ID:</strong> {user.id}</p>
+      <p style={{color: '#EBBD4AFF'}}><strong>Name:</strong> {user.name}</p>
+      <p style={{color: '#3A34EBFF'}}><strong>Email:</strong> {user.email}</p>
     </div>
   );
 }
