@@ -15,7 +15,7 @@ async function fetchUsers(): Promise<IUser[] | null> {
 
     return [...apiUsers, ...predefinedUsers];
   } catch(error) {
-    console.error(console.error("Error fetching users:", error)); 
+    console.error("Error fetching users:", error); 
     return null;
   }
 }
