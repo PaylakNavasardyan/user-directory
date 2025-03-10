@@ -1,5 +1,6 @@
 import { IUser } from "@/app/types/types"; 
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
 
 async function getUser(id: string): Promise<IUser | null> {
   try {
@@ -22,9 +23,21 @@ async function getUser(id: string): Promise<IUser | null> {
   }
 }
 
+export async function generateMetadata({ params }: {params: {id:string} }): Promise<Metadata> {
+  const user = await getUser(params.id);
+  if (!user) return {
+    title: "User Not Found",
+    description: "User is not found in our database"
+  };
+
+  return {
+    title: `${user.name} - Profile`,
+    description: `View profile details of ${user.name}`
+  }
+};
+
 export default async function UserPage({ params }: { params: {id: string} }) {
   const user = await getUser(params.id);
-
   if(!user) return notFound();
 
   return (

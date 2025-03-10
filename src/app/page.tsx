@@ -1,6 +1,7 @@
 import  Link  from "next/link";
 import classes from "./page.module.css";
 import { IUser } from "./types/types";
+import { Metadata } from "next";
 
 async function fetchUsers(): Promise<IUser[] | null> {
   try {
@@ -18,6 +19,11 @@ async function fetchUsers(): Promise<IUser[] | null> {
     console.error("Error fetching users:", error); 
     return null;
   }
+}
+
+export const metadata: Metadata = {
+  title: "Home-Page: User Directory",
+  description: "Լearn more about your favorite user"
 }
 
 export default async function Home() {
